@@ -1,6 +1,37 @@
 import React, { Component } from 'react'
 
 export default class Login extends Component {
+  constructor(props){
+    super(props)
+    this.state={
+      email:"",
+      password:""
+    };
+    this.handlesubmit= this.handlesubmit.bind(this);
+  }
+  handlesubmit(e){
+    e.preventDefault();
+    const {email, password} =this.state;
+    console.log(email, password);
+
+    fetch("http://localhost:8081/login",{
+      method: "POST",
+      crossDomain:true,
+      Headers:{
+        "Content-Type" : "application/json",
+        Accept: "application/json",
+        "Access-Control-Allow-Origin":"*",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    }).then((res)=>res.json())
+      .then((data)=>{
+        console.log(data,"user registration");
+    });
+  }
+
   render() {
     return (
       <form>
@@ -12,6 +43,7 @@ export default class Login extends Component {
             type="email"
             className="form-control"
             placeholder="Enter email"
+            onChange={(e)=> this.setState({email: e.target.value})}
           />
         </div>
 
@@ -21,6 +53,7 @@ export default class Login extends Component {
             type="password"
             className="form-control"
             placeholder="Enter password"
+            onChange={(e)=> this.setState({password: e.target.value})}
           />
         </div>
 

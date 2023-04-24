@@ -17,7 +17,7 @@ export default class SignUp extends Component {
     const {fname, lname, email, password} =this.state;
     console.log(fname, lname, email, password);
 
-    fetch("http://localhost:8080/register",{
+    fetch("http://localhost:8081/register",{
       method: "POST",
       crossDomain:true,
       Headers:{
@@ -26,10 +26,10 @@ export default class SignUp extends Component {
         "Access-Control-Allow-Origin":"*",
       },
       body:JSON.stringify({
-        fname: fname,
-        lname: lname,
-        email: email,
-        password: password,
+        fname,
+        lname,
+        email,
+        password,
       }),
     }).then((res)=>res.json())
       .then((data)=>{
@@ -56,7 +56,7 @@ export default class SignUp extends Component {
         <div className="mb-3">
           <label>Last name</label>
           <input type="text" className="form-control" placeholder="Last name" 
-          onChange={(e)=> this.setState({fname: e.target.value})}
+          onChange={(e)=> this.setState({lname: e.target.value})}
           />
         </div>
 
