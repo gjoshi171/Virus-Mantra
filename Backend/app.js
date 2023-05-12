@@ -45,7 +45,8 @@ app.listen(8081, () =>{
 
 const User = mongoose.model("userInfo")
 app.post("/register", async(req, res)=>{
-    const {fname,lname, email, password} = req.body;
+    const {email, password} = req.body;
+    //const {fname,lname, email, password} = req.body;
     try{
         const encryptedPassword = await bcrypt.hash(password, 10);
         const olduser = await User.findOne({email});
@@ -54,8 +55,6 @@ app.post("/register", async(req, res)=>{
         }
         //const encryptedPassword = await bcrypt.hash(password, 10);
         await User.create({
-            fname,
-            lname,
             email,
             password: encryptedPassword,
         });
