@@ -11,6 +11,8 @@ import Covid from "./Pages/Covid";
 import Ebola from "./Pages/Ebola";
 import HIV from "./Pages/HIV";
 import Polio from "./Pages/Polio";
+import Plasma from "./Pages/Plasma";
+import Statistics from "./Pages/Stastics";
 
 export default function App() {
   return (
@@ -22,6 +24,12 @@ export default function App() {
       </div> */}
 
         <Switch>
+          <Route path="/plasma">
+            <Plasma />
+          </Route>
+          <Route path="/statistics">
+            <Statistics />
+          </Route>
           <Route path="/signUp">
             <SignIn />
           </Route>

@@ -51,12 +51,32 @@ const diseases = [
     image:
       "https://www.cdc.gov/homepage/images/cards/protect-health-720x400px_1.jpg?_=28886",
   },
+  {
+    name: "Monkey Pox",
+    route: "",
+    info: "This is a info card. You can use this section to describe the content",
+    image: "https://www.cdc.gov/poxvirus/mpox/images/home-prevent.jpg?_=82729",
+  },
+  {
+    name: "Covid 19",
+    route: "",
+    info: "This is a info card. You can use this section to describe the content",
+    image: "https://www.cdc.gov/homepage/images/cards/covid19.jpg?_=95798",
+  },
+  {
+    name: "Swine flu",
+    route: "",
+    info: "This is a info card. You can use this section to describe the content",
+    image:
+      "https://www.cdc.gov/homepage/images/cards/protect-health-720x400px_1.jpg?_=28886",
+  },
 ];
 
 const theme = createTheme();
 
 export default function Home() {
   const history = useHistory();
+
   return (
     <ThemeProvider theme={theme}>
       <Header title="Virus Mantra" />
@@ -96,8 +116,23 @@ export default function Home() {
               spacing={2}
               justifyContent="center"
             >
-              <Button variant="contained">Find Plasma</Button>
-              <Button variant="outlined">Donate Plasma</Button>
+              <Button
+                variant="contained"
+                onClick={() => history.push("/plasma")}
+              >
+                Find Plasma / Donate Plasma
+              </Button>
+              <Button
+                variant="outlined"
+                onClick={
+                  () => history.push("/statistics")
+                  // window.location.replace(
+                  //   "https://app.powerbi.com/view?r=eyJrIjoiNjljOTY0ZDYtMzczZS00MWNhLWE1ODAtZWY0ZDY3YWQ5Y2QxIiwidCI6IjNkOGE4NjQwLTE1YzYtNDk1NS05MTc4LTlhNjEzYTk4ZDNjYSJ9&pageName=ReportSectionced8bfebcec9c0b3a510"
+                  // )
+                }
+              >
+                Statistics
+              </Button>
             </Stack>
           </Container>
         </Box>

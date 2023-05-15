@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
 function Copyright(props) {
   return (
@@ -45,10 +46,10 @@ const theme = createTheme();
 //     // use this email and password to login and then redirect to home page again
 //   };
 
-
-
 export default function SignIn() {
   const [error, setError] = useState("");
+
+  const history = useHistory();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -56,35 +57,35 @@ export default function SignIn() {
     const email = data.get("email");
     const password = data.get("password");
 
-    try {
-      const response = await fetch("https://localhost:8081/register", {
-        method: "POST",
-        crossDomain:true,
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "Access-Control-Allow-Origin":"*",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+    history.push("/plasma");
 
-      if (response.ok) {
-        // Login successful, perform necessary actions
-        console.log("Logged in successfully");
-        // Redirect to the home page
-        // window.location.href = "/home";
-      } else {
-        // Login failed
-        const errorData = await response.json();
-        setError(errorData.message);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      setError("An error occurred. Please try again.");
-    }
+    // try {
+    //   const response = await fetch("https://localhost:8081/register", {
+    //     method: "POST",
+    //     crossDomain:true,
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Accept: "application/json",
+    //       "Access-Control-Allow-Origin":"*",
+    //     },
+    //     body: JSON.stringify({ email, password }),
+    //   });
+
+    //   if (response.ok) {
+    //     // Login successful, perform necessary actions
+    //     console.log("Logged in successfully");
+    //     // Redirect to the home page
+    //     // window.location.href = "/home";
+    //   } else {
+    //     // Login failed
+    //     const errorData = await response.json();
+    //     setError(errorData.message);
+    //   }
+    // } catch (error) {
+    //   console.error("Error:", error);
+    //   setError("An error occurred. Please try again.");
+    // }
   };
-
-
 
   return (
     <ThemeProvider theme={theme}>

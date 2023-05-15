@@ -1,6 +1,5 @@
 const express = require('express');
 require('dotenv').config()
-require("./userDetails")
 require("./userDetailsPlasma")
 
 const app = express()
@@ -23,29 +22,16 @@ app.listen(8081, () =>{
     console.log("port is working");
 });
 
-// app.get('/', (req, res) => {
-//     res.send('<h1>Hi there! </h1>')
-// })
+const User = mongoose.model("userInfoPlasma")
 
-// app.post('/post', async(req, res)=>{
-//     console.log(req.body);
-//     const {data} = req.body;
-
-//     try{
-//    if(data == "gaurav"){
-//     res.send({status: "OK"})
-//    }
-//     else{
-//         res.send({status : "user not found"});
-//     }}
-//     catch(error){
-//         res.send({status : "Some thing happend, try again"})
-//     }
-//});
-
-const User = mongoose.model("userInfo")
 app.post("/register", async(req, res)=>{
-    const {email, password} = req.body;
+    const { fullName, email, password, 
+    city,
+    state,
+    country,
+    contactNo,
+    fullAddress,
+    bloodType} = req.body;
     //const {fname,lname, email, password} = req.body;
     try{
         const encryptedPassword = await bcrypt.hash(password, 10);
@@ -55,8 +41,15 @@ app.post("/register", async(req, res)=>{
         }
         //const encryptedPassword = await bcrypt.hash(password, 10);
         await User.create({
+            fullName,
             email,
-            password: encryptedPassword,
+            password: encryptedPassword, 
+            city,
+            state,
+            country,
+            contactNo,
+            fullAddress,
+            bloodType,
         });
         res.send({status:"OK"})
     } catch (error){
@@ -64,10 +57,24 @@ app.post("/register", async(req, res)=>{
     }
 });
 
+app.get("/getDonar/:city", async(req, res)=>{
+  fetchCity= req.params.city
+
+  try {
+   
+      const allUser = await User.find({city: fetchCity});
+      res.json(allUser)
+      res.send({status:"OK", data: allUser})
+  } catch (error){
+      res.send({status:"error"})
+   
+  }
+});
+
 app.post("/login", async (req, res) => {
     const { email, password } = req.body;
   
-    const user = await User.findOne({ email });
+    const user = await User1.findOne({ email });
     if (!user) {
       return res.json({ error: "User Doesn't Exist" });
     }
@@ -85,22 +92,3 @@ app.post("/login", async (req, res) => {
     res.json({ status: "error", error: "InvAlid Password" });
   });
 
-  const UserPlasma = mongoose.model("userInfoPlasma")
-  app.post("/donate", async(req, res)=>{
-      const {fname, lname, bloodType, city, state, country, contactNo, ConpleteAddress } = req.body;
-      try{
-          await UserPlasma.create({
-              fname,
-              lname,
-              bloodType, 
-              city, 
-              state, 
-              country, 
-              contactNo, 
-              ConpleteAddress,
-          });
-          res.send({status:"OK"})
-      } catch (error){
-          res.send({status:"error"})
-      }
-  });
