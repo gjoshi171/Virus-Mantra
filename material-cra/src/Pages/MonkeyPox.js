@@ -15,8 +15,8 @@ import Sidebar from "../Components/Sidebar";
 
 const mainFeaturedPost = {
   title: "Monkey Pox",
-  description:
-    "Vaccination is an important tool in preventing the spread of mpox. Find out if you are eligible to get vaccinated and where vaccine is available in your area.",
+  // description:
+  //   "Vaccination is an important tool in preventing the spread of mpox. Find out if you are eligible to get vaccinated and where vaccine is available in your area.",
   image:
     "https://images.hindustantimes.com/img/2022/07/14/1600x900/HEALTH-MONKEYPOX--2_1657811796037_1657811796037_1657811814900_1657811814900.JPG",
   // imageText: "main image description",

@@ -23,7 +23,9 @@ function Copyright() {
     <Typography variant="body2" color="text.secondary" align="center">
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Virus Mantra
+          <Typography component="span" variant="body2" sx={{ fontWeight: 'bold' }}>
+          Virus Mantra
+        </Typography>
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -35,40 +37,62 @@ const diseases = [
   {
     name: "Monkey Pox",
     route: "",
-    info: "This is a info card. You can use this section to describe the content",
+    info: "The monkeypox virus is an orthopoxvirus that causes mpox (monkeypox), a disease with symptoms similar to smallpox, although less severe. While smallpox was eradicated in 1980, mpox continues to occur in countries of central and west Africa. Since May 2022, cases have also been reported from countries without previously documented mpox transmission outside the African region. Two distinct clades of the monkeypox virus have been identified: Clade I (previously known as the Congo Basin (central African) clade and Clade II (the former west African clade).",
     image: "https://www.cdc.gov/poxvirus/mpox/images/home-prevent.jpg?_=82729",
   },
   {
     name: "Covid 19",
     route: "",
-    info: "This is a info card. You can use this section to describe the content",
-    image: "https://www.cdc.gov/homepage/images/cards/covid19.jpg?_=95798",
+    info: "Coronavirus disease (COVID-19) is an infectious disease caused by the SARS-CoV-2 virus. Most people infected with the virus will experience mild to moderate respiratory illness and recover without requiring special treatment. However, some will become seriously ill and require medical attention. Older people and those with underlying medical conditions like cardiovascular disease, diabetes, chronic respiratory disease, or cancer are more likely to develop serious illness. Anyone can get sick with COVID-19 and become seriously ill or die at any age.",
+    image: "https://cdn.who.int/media/images/default-source/mca/mca-covid-19/coronavirus-2.tmb-1366v.jpg?sfvrsn=4dba955c_12%201366w",
   },
   {
     name: "Swine flu",
     route: "",
-    info: "This is a info card. You can use this section to describe the content",
+    info: "The H1N1 flu, sometimes called swine flu, is a type of influenza A virus. During the 2009-10 flu season, a new H1N1 virus began causing illness in humans. It was often called swine flu and was a new combination of influenza viruses that infect pigs, birds and humans.",
     image:
-      "https://www.cdc.gov/homepage/images/cards/protect-health-720x400px_1.jpg?_=28886",
+      "https://www.cdc.gov/H1N1flu/images/3D_Influenza/3D_Influenza_blue_no_key_full_lrg2.jpg",
   },
   {
-    name: "Monkey Pox",
+    name: "Ebola",
     route: "",
-    info: "This is a info card. You can use this section to describe the content",
-    image: "https://www.cdc.gov/poxvirus/mpox/images/home-prevent.jpg?_=82729",
+    info: "Ebola virus disease (EVD) is a deadly disease with occasional outbreaks that occur mostly on the African continent. EVD most commonly affects people and nonhuman primates (such as monkeys, gorillas, and chimpanzees).",
+    image: "https://www.cdc.gov/dotw/ebola/images/main_928px.jpg?_=87458",
   },
   {
-    name: "Covid 19",
+    name: "Polio",
     route: "",
-    info: "This is a info card. You can use this section to describe the content",
-    image: "https://www.cdc.gov/homepage/images/cards/covid19.jpg?_=95798",
+    info: "Polio, or poliomyelitis, is a disabling and life-threatening disease caused by the poliovirus. The virus spreads from person to person and can infect a person's spinal cord, causing paralysis (can't move parts of the body).",
+    image: "https://www.cdc.gov/polio/what-is-polio/images/polio_virus.jpg?_=37886",
   },
   {
-    name: "Swine flu",
+    name: "Chicken Pox",
     route: "",
-    info: "This is a info card. You can use this section to describe the content",
+    info: "Chickenpox is a highly contagious disease caused by the varicella-zoster virus (VZV). It can cause an itchy, blister-like rash among other symptoms. The rash first appears on the chest, back, and face, and then spreads over the entire body.",
     image:
-      "https://www.cdc.gov/homepage/images/cards/protect-health-720x400px_1.jpg?_=28886",
+      "https://media.istockphoto.com/id/1253218186/photo/varicella-zoster-or-chickenpox-virus.jpg?s=2048x2048&w=is&k=20&c=HHp5ERbs7HFIDYiT6QRZBZpgiV48mNk0Dp2tgX2USbE=",
+  },
+  
+  {
+    name: "Rabies",
+    route: "",
+    info: "Rabies is a fatal but preventable viral disease. It can spread to people and pets if they are bitten or scratched by a rabid animal. In the United States, rabies is mostly found in wild animals like bats, raccoons, skunks, and foxes.",
+    image:
+      "https://www.woodtv.com/wp-content/uploads/sites/51/2016/08/cdc-rabies_38518306_ver1.0.jpg?w=650",
+  },
+  {
+    name: "Tuberculosis",
+    route: "",
+    info: "Tuberculosis (TB) is an infectious disease that most often affects the lungs and is caused by a type of bacteria. It spreads through the air when infected people cough, sneeze or spit. Tuberculosis is preventable and curable. About a quarter of the global population is estimated to have been infected with TB bacteria.",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBEKWCFww_o3lZ9uyVCM1SJYRZkB9rDVy-zA&usqp=CAU",
+  },
+  {
+    name: "HIV",
+    route: "",
+    info: "HIV (human immunodeficiency virus) is a virus that attacks the body's immune system. If HIV is not treated, it can lead to AIDS (acquired immunodeficiency syndrome). There is currently no effective cure. Once people get HIV, they have it for life. But with proper medical care, HIV can be controlled.",
+    image:
+      "https://cdn-prod.medicalnewstoday.com/content/images/articles/321/321803/hiv-virus-in-pink.jpg",
   },
 ];
 
@@ -98,7 +122,7 @@ export default function Home() {
               color="text.primary"
               gutterBottom
             >
-              Virus mantra
+              <strong>Virus mantra</strong>
             </Typography>
             <Typography
               variant="h5"
@@ -108,7 +132,7 @@ export default function Home() {
             >
               We provide the information on diseases and outbreak's, you can
               check symptoms, treatment all details on our site, You can also
-              avail our feature to find plasma in case of emergency treatment
+              avail our feature to find plasma in case of emergency treatment.
             </Typography>
             <Stack
               sx={{ pt: 4 }}

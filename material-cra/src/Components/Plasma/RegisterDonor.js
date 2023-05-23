@@ -15,6 +15,8 @@ import {
 import { makeStyles } from "@mui/styles";
 import React, { useEffect, useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useHistory } from "react-router-dom";
+
 
 const useStyles = makeStyles({
   table: {
@@ -45,10 +47,35 @@ export default function UserRegister({ onUserStage }) {
   const { fullName, email, password, city, bloodType, state, country, contactNo, fullAddress } =
     donor;
 
-  const onRegisterHandler = () => {
-    DonorService().RegisterDonor(donor);
-    getFetch('localhost:8081/register');
-    return onUserStage(2);
+  // const onRegisterHandler = () => {
+  //   DonorService().RegisterDonor(donor);
+  //   //getFetch('localhost:8081/register');
+  //   return onUserStage(2);
+  // };
+
+  const onRegisterHandler = async () => {
+
+    const rawResponse = await fetch("http://localhost:8081/register", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fullName,
+        email,
+        password,
+        city,
+        state,
+        country,
+        contactNo,
+        fullAddress,
+        bloodType
+      }),
+    });
+    const content = await rawResponse.json();
+
+    console.log(content);
   };
 
   const onDonorChange = (event, label) => {
@@ -70,6 +97,7 @@ export default function UserRegister({ onUserStage }) {
     setDonor(IntialUserData);
   };
 
+  const history = useHistory();
   return (
     <div>
       <Card>
@@ -193,7 +221,12 @@ export default function UserRegister({ onUserStage }) {
         <CardActions>
           <Button
             disabled={isValid}
-            onClick={onRegisterHandler}
+            // onClick={onRegisterHandler}
+            onClick={() => {
+              onRegisterHandler();
+              history.push("/home");
+            }}
+            
             variant="outlined"
             size="large"
           >

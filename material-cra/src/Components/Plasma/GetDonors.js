@@ -50,16 +50,14 @@ export default function BasicTable({ onUserStage }) {
   const [bloodType, setBloodType] = useState("");
   const [filterDonorData, setFilterDonorData] = useState(donorData);
 
-  // useEffect(() => {
-  //   getFetch();
-  // }, []);
 
   useEffect(() => {
     setFilterDonorData(donorData);
   }, [donorData]);
 
   const getFetch = async () => {
-    const response = await fetch("http://localhost:8081/getDonar");
+    if(!city || !bloodType) return
+    const response = await fetch(`http://localhost:8081/getDonar/${city}/${bloodType}`);
     const jsonData = await response.json();
     console.log("Getting data: ", jsonData);
     setDonorData(jsonData);
@@ -109,11 +107,24 @@ export default function BasicTable({ onUserStage }) {
     console.log("response: ", filterDonorData);
   };
 
-  const onClearHandler = () => {
+  const onClearHandler = async () => {
+    // Tera get call
+
+    const rawResponse = await fetch("http://localhost:8081/getDonar/:city/:bloodType", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    const content = await rawResponse?.json();
+
+    console.log(content);
     setCity("");
     setBloodType("");
     setFilterDonorData(donorData);
   };
+
   return (
     <>
       <Avatar onClick={() => onUserStage(0)}>{/* <ArrowBackIcon /> */}</Avatar>
@@ -157,6 +168,9 @@ export default function BasicTable({ onUserStage }) {
           <ListItem>
             <Button variant="outlined" onClick={onClearHandler}>
               Clear
+            </Button>
+            <Button variant="outlined" onClick={getFetch}>
+              submit
             </Button>
           </ListItem>
         </List>

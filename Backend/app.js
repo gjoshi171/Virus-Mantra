@@ -36,6 +36,7 @@ app.post("/register", async(req, res)=>{
     try{
         const encryptedPassword = await bcrypt.hash(password, 10);
         const olduser = await User.findOne({email});
+        console.log( "this is console" + olduser)
         if(olduser){
            return res.send({error: "User Exists"})
         }
@@ -57,13 +58,75 @@ app.post("/register", async(req, res)=>{
     }
 });
 
-app.get("/getDonar/:city", async(req, res)=>{
-  fetchCity= req.params.city
+// app.post("/login", async (req, res) => {
+//   const { email, password } = req.body;
+
+//   try{
+//   const user = await User.findOne({email});
+//   console.log(user)
+//   if (user==null) {
+//     return res.json({ error: "User Doesn't Exist" });
+//   }
+//   if (await bcrypt.compare(password, user.password)) {
+//     const token = jwt.sign({}, JWT_SECRET, {
+      
+//     });
+
+//     if (res.status(201)) {
+//       return res.json({ status: "ok", data: token });
+//     } else {
+//       return res.json({ error: "error" });
+//     }
+//   }
+//   res.json({ status: "error", error: "InvAlid Password" });
+// }
+// catch (error){
+//   res.send({status:"error"})
+// }
+// });
+
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
 
   try {
+    const user = await User.findOne({ email });
+    
+    if (user==null) {
+      return res.status(400).json({ error : "email or password missing "});
+    }
+    
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    
+    if ( isPasswordValid) {
+      const token = jwt.sign({}, JWT_SECRET, {
+        // Additional JWT options if needed
+        
+      });
+
+      return res.json({ status: "OK", data: token });
+    }
+    if(user.email==email && !isPasswordValid) {
+      return res.status(400).json({ error: "Wrong password" });
+    }
+    else {
+      return res.status(400).json({ error: "User doesn't exist" });
+    }
+  } catch (error) {
+    console.error('Error occurred while logging in:', error);
+    return res.status(400).json({ status: "error"});
+  //  res.status(500).json({ status: "error" });
+  }
+});
+
+
+app.get("/getDonar/:city/:bloodType", async(req, res)=>{
+  fetchCity= req.params.city
+  fetchblood= req.params.bloodType
+  try {
    
-      const allUser = await User.find({city: fetchCity});
-      res.json(allUser)
+      const allUser = await User.find({city: fetchCity, bloodType: fetchblood}).select("fullName bloodType city state country contactNo");
+
+     return res.json(allUser)
       res.send({status:"OK", data: allUser})
   } catch (error){
       res.send({status:"error"})
@@ -71,24 +134,4 @@ app.get("/getDonar/:city", async(req, res)=>{
   }
 });
 
-app.post("/login", async (req, res) => {
-    const { email, password } = req.body;
-  
-    const user = await User1.findOne({ email });
-    if (!user) {
-      return res.json({ error: "User Doesn't Exist" });
-    }
-    if (await bcrypt.compare(password, user.password)) {
-      const token = jwt.sign({}, JWT_SECRET, {
-        //expiresIn: "15m",
-      });
-  
-      if (res.status(201)) {
-        return res.json({ status: "ok", data: token });
-      } else {
-        return res.json({ error: "error" });
-      }
-    }
-    res.json({ status: "error", error: "InvAlid Password" });
-  });
 

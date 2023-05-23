@@ -11,8 +11,12 @@ import Covid from "./Pages/Covid";
 import Ebola from "./Pages/Ebola";
 import HIV from "./Pages/HIV";
 import Polio from "./Pages/Polio";
+import ChickenPox from "./Pages/ChickenPox";
+import Swineflu from "./Pages/Swineflu";
 import Plasma from "./Pages/Plasma";
 import Statistics from "./Pages/Stastics";
+import GetDonar from "./Components/Plasma/GetDonors";
+
 
 export default function App() {
   return (
@@ -26,6 +30,12 @@ export default function App() {
         <Switch>
           <Route path="/plasma">
             <Plasma />
+          </Route>
+          <Route path="/getDonar">
+            <GetDonar />
+          </Route>
+          <Route path="/signIn">
+            <SignIn />
           </Route>
           <Route path="/statistics">
             <Statistics />
@@ -41,6 +51,12 @@ export default function App() {
           </Route>
           <Route path="/ebola">
             <Ebola />
+          </Route>
+          <Route path="/swine flu">
+            <Swineflu />
+          </Route>
+          <Route path="/chicken pox">
+            <ChickenPox />
           </Route>
           <Route path="/hiv">
             <HIV />

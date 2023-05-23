@@ -14,9 +14,10 @@ function Header(props) {
   const sections = [
     { title: "Monkey Pox", url: "/monkeyPox" },
     { title: "Covid 19", url: "/covid" },
-    { title: "Ebola", url: "ebola" },
-    { title: "HIV", url: "hiv" },
-    { title: "Polio", url: "polio" },
+    { title: "Ebola", url: "/ebola" },
+    { title: "Chicken Pox", url: "/chicken pox" },
+    { title: "Polio", url: "/polio" },
+    { title: "Swine flu", url: "/swine flu" },
   ];
 
   return (
@@ -34,7 +35,7 @@ function Header(props) {
           {title}
         </Typography>
 
-        <Button
+        {/* <Button
           variant="outlined"
           size="small"
           onClick={() => history.push("/signUp")}
@@ -48,7 +49,7 @@ function Header(props) {
           >
             Sign up
           </Link>
-        </Button>
+        </Button> */}
       </Toolbar>
       <Toolbar
         component="nav"

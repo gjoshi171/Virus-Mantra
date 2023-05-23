@@ -14,14 +14,15 @@ import Main from "../Components/Main";
 import Sidebar from "../Components/Sidebar";
 
 const mainFeaturedPost = {
-  title: "Polio",
+  title: "Chicken Pox",
   description:
-    "Vaccination is an important tool in preventing the spread of mpox." ,
+    "Vaccination is an important tool in preventing the spread of mpox. Find out if you are eligible to get vaccinated and where vaccine is available in your area.",
   image:
-    "https://www.cdc.gov/polio/what-is-polio/images/polio_virus.jpg?_=37886",
+    "https://www.woodtv.com/wp-content/uploads/sites/51/2016/08/cdc-rabies_38518306_ver1.0.jpg?w=650",
   // imageText: "main image description",
   // linkText: "Continue reading…",
 };
+
 
 const theme = createTheme();
 
@@ -29,7 +30,7 @@ export default function MonkeyPox() {
   const [post1, setPost1] = React.useState("");
 
   React.useEffect(() => {
-    const readmePath = require("../Assets/blog-post.5.md");
+    const readmePath = require("../Assets/blog-post.6.md");
     fetch(readmePath)
       .then((response) => {
         return response.text();
@@ -54,7 +55,7 @@ export default function MonkeyPox() {
             ))} */}
           </Grid>
           <Grid container spacing={5} sx={{ mt: 3 }}>
-            <Main title="What is Polio Disease" posts={posts} />
+            <Main title="What is Rabies " posts={posts} />
             {/* <Sidebar
               title={sidebar.title}
               description={sidebar.description}
